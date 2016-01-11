@@ -1,0 +1,10 @@
+{
+  "require": {
+    "doctrine/orm": "*",
+    "monolog/monolog": "*",
+    "slim/slim":"^2.0",
+    "php-di/php-di": "*",
+    "robmorgan/phinx": "*",
+    "lusitanian/oauth": "~0.3"
+  }
+}

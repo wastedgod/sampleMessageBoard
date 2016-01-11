@@ -1,0 +1,14 @@
+RewriteEngine On
+#RewriteBase /
+
+SetEnv DB_HOST localhost
+SetEnv DB_USERNAME sampleMessageBoa
+SetEnv DB_PASSWORD nrsa0b5c1
+SetEnv DB_DRIVER pdo_mysql
+SetEnv DB_NAME sampleMessageBoard
+SetEnv APP_MODE dev
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
