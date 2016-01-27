@@ -1,59 +1,84 @@
 <?php
 namespace sampleMessageBoard\application\model;
 use DoctrineExtensions\NestedSet\MultipleRootNode;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping as ORM;
 /**
-* @Entity(repositoryClass="sampleMessageBoard\application\repository\PostRepository")
-* @HasLifecycleCallbacks
-* @Table(name="posts")
+* @ORM\Entity(repositoryClass="sampleMessageBoard\application\repository\PostRepository")
+* @ORM\HasLifecycleCallbacks
+* @ORM\Table(name="posts")
 **/
-//class PostModel extends Doctrine_Record implements iModel{
-class PostModel extends BaseModel implements MultipleRootNode{
+class PostModel extends BaseModel implements MultipleRootNode, iTreeNode{
   // public function setUp(){
   //   $this->actAs('NestedSet', array(
   //     'hasManyRoots' => true,
   //     'rootColumn' => 'root_id'
   //   ));
   // }
-  /** @Id @Column(type="integer") @GeneratedValue **/
+  /**
+  * @ORM\Id
+  * @ORM\Column(type="integer")
+  * @ORM\GeneratedValue
+  **/
   protected $id;
 
-  /** @Column(type="integer") **/
+  /**
+  * @ORM\Column(type="integer")
+  **/
   protected $root;
 
-  /** @Column(type="integer") **/
+  /**
+  * @ORM\Column(type="integer")
+  **/
   protected $user_id;
 
   /**
-  * @Column(type="integer")
-  * @ManyToOne(targetEntity="BoardModel")
+  * @ORM\Column(type="integer")
+  * @ORM\ManyToOne(targetEntity="BoardModel")
   **/
   protected $board_id;
 
-  /** @Column(type="string") **/
+  /**
+  * @ORM\Column(type="string")
+  **/
   protected $title;
 
-  /** @Column(type="string") **/
+  /**
+  * @ORM\Column(type="string")
+  **/
   protected $message;
 
-  /** @Column(type="boolean") **/
+  /**
+  * @ORM\Column(type="boolean")
+  **/
   protected $active;
 
   /**
-  * @Column(type="integer")
-  * @ManyToOne(targetEntity="PostModel")
+  * @ORM\Column(type="integer")
+  * @ORM\ManyToOne(targetEntity="PostModel")
   **/
   protected $parent_id;
 
-  /** @Column(type="integer") **/
+  /**
+  * @ORM\Column(type="integer")
+  **/
   protected $lft;
 
-  /** @Column(type="integer") **/
+  /**
+  * @ORM\Column(type="integer")
+  **/
   protected $rgt;
 
-  /** @Column(type="datetime") **/
+  /**
+  * @ORM\Column(type="datetime")
+  **/
   protected $created;
 
-  /** @Column(type="datetime") **/
+  /**
+  * @ORM\Column(type="datetime")
+  **/
   protected $modified;
 
   public function __toString(){
@@ -131,26 +156,6 @@ class PostModel extends BaseModel implements MultipleRootNode{
     );
   }
 
-  ##############################################################################
-  # listeners
-  # note - use the classes under the listener directory for 99% of the cases
-  ##############################################################################
-  // some event listeners for create / update to set the created / modified fields
-	/**
-	* @PrePersist
-	* sets the created and modified date time to now on record create
-	**/
-	public function setCreateDates(){
-		$t = date_create(date('Y-m-d H:i:s'));
-		$this->created = $t;
-		$this->modified = $t;
-	}
-	/**
-	* @PreUpdate
-	* sets the modified date time to now on update
-	**/
-	public function setUpdateDates(){
-		$this->modified = date_create(date("Y-m-d H:i:s"));
-	}
+
 }
 ?>

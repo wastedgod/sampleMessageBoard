@@ -1,10 +1,28 @@
 {
+  "repositories":{
+    "doctrine2-nestedset":{
+      "type": "package",
+      "package":{
+        "name": "blt04/doctrine2-nestedset",
+        "version": "1.0",
+        "source":{
+          "url": "https://github.com/blt04/doctrine2-nestedset.git",
+          "type": "git",
+          "reference": "master"
+        }
+      }
+    }
+  },
   "require": {
     "doctrine/orm": "*",
     "monolog/monolog": "*",
     "slim/slim":"^2.0",
     "php-di/php-di": "*",
-    "robmorgan/phinx": "*",
-    "lusitanian/oauth": "~0.3"
+    "lusitanian/oauth": "~0.3",
+    "blt04/doctrine2-nestedset": "*",
+    "robmorgan/phinx": "*"
+  },
+  "require-dev": {
+    "codeception/codeception": "*"
   }
 }

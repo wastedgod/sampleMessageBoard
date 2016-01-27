@@ -3,43 +3,43 @@ namespace sampleMessageBoard\application\model;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping as ORM;
+/**
+* @ORM\Entity(repositoryClass="sampleMessageBoard\application\repository\BoardRepository")
+* @ORM\HasLifecycleCallbacks
+* @ORM\Table(name="boards")
+**/
 class BoardModel extends BaseModel{
-  /**
-  * @Entity(repositoryClass="sampleMessageBoard\application\repository\BoardRepository")
-  * @HasLifecycleCallbacks
-  * @Table(name="boards")
-  **/
-
   /**
    * @var integer
    *
-   * @Column(name="id", type="integer", nullable=false)
-   * @Id
-   * @GeneratedValue(strategy="IDENTITY")
+   * @ORM\Column(name="id", type="integer", nullable=false)
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="IDENTITY")
    */
   protected $id;
 
   /**
   * @var string
   *
-  * @Column(name="title", type="string")
+  * @ORM\Column(name="title", type="string")
   **/
   protected $title;
 
   /**
   * @var integer
   *
-  * @Column(name="owner_id", type="integer")
+  * @ORM\Column(name="owner_id", type="integer")
   **/
   protected $owner_id;
 
   /**
-  * @Column(name="created", type="datetime")
+  * @ORM\Column(name="created", type="datetime")
   **/
   protected $created;
 
   /**
-  * @Column(name="modified", type="datetime")
+  * @ORM\Column(name="modified", type="datetime")
   **/
   protected $modified;
 
@@ -72,13 +72,14 @@ class BoardModel extends BaseModel{
 
 
   public function toArray(){
-    return array(
+    $ret = array(
       'id' => $this->id,
       'title' => $this->title,
       'ownerId' => $this->owner_id,
       'created' => $this->created,
       'modified' => $this->modified
     );
+    return $ret;
   }
 }
 ?>

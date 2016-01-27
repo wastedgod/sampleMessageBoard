@@ -1,27 +1,47 @@
 <?php
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping as ORM;
 namespace sampleMessageBoard\application\model;
 /**
-* @Entity(repositoryClass="sampleMessageBoard\application\repository\UserRepository")
-* @HasLifecycleCallbacks
-* @Table(name="users")
+* @ORM\Entity(repositoryClass="sampleMessageBoard\application\repository\UserRepository")
+* @ORM\HasLifecycleCallbacks
+* @ORM\Table(name="users")
 **/
-class UserModel implements iModel{
-  /** @Id @Column(type="integer") @GeneratedValue **/
+class UserModel extends BaseModel implements iModel{
+  /**
+  * @ORM\Id
+  * @ORM\Column(type="integer")
+  * @ORM\GeneratedValue
+  **/
   protected $id;
 
-  /** @Column(type="string") **/
-  protected $username;
+  /**
+  * @ORM\Column(type="integer")
+  **/
+  protected $auth_id;
 
-  /** @Column(type="string") **/
-  protected $password;
-
-  /** @Column(type="boolean") **/
+  /**
+  * @ORM\Column(type="integer");
+  **/
+  protected $provider_id;
+  /**
+  * @ORM\Column(type="boolean")
+  **/
   protected $active;
 
-  /** @Column(type="datetime") **/
+  /**
+  * @ORM\Column(type="integer")
+  **/
+  protected $role_id;
+
+  /**
+  * @ORM\Column(type="datetime")
+  **/
   protected $created;
 
-  /** @Column(type="datetime") **/
+  /**
+  * @ORM\Column(type="datetime")
+  **/
   protected $modified;
 
   ##############################################################################
@@ -78,27 +98,27 @@ class UserModel implements iModel{
     );
   }
 
-  ##############################################################################
-  # listeners
-  # note - use the classes under the listener directory for 99% of the cases
-  ##############################################################################
-  // some event listeners for create / update to set the created / modified fields
-	/**
-	* @PrePersist
-	* sets the created and modified date time to now on record create
-	**/
-	public function setCreateDates(){
-		$t = date_create(date('Y-m-d H:i:s'));
-		$this->created = $t;
-		$this->modified = $t;
-	}
-	/**
-	* @PreUpdate
-	* sets the modified date time to now on update
-	**/
-	public function setUpdateDates(){
-		$this->modified = date_create(date("Y-m-d H:i:s"));
-	}
+  // ##############################################################################
+  // # listeners
+  // # note - use the classes under the listener directory for 99% of the cases
+  // ##############################################################################
+  // // some event listeners for create / update to set the created / modified fields
+	// /**
+	// * @PrePersist
+	// * sets the created and modified date time to now on record create
+	// **/
+	// public function setCreateDates(){
+	// 	$t = date_create(date('Y-m-d H:i:s'));
+	// 	$this->created = $t;
+	// 	$this->modified = $t;
+	// }
+	// /**
+	// * @PreUpdate
+	// * sets the modified date time to now on update
+	// **/
+	// public function setUpdateDates(){
+	// 	$this->modified = date_create(date("Y-m-d H:i:s"));
+	// }
 
 }
 ?>
